@@ -49,7 +49,7 @@ public final class GoGoUpCommands {
 
         source.sendSuccess(
                 () -> Component.literal("最大建築高度を Y=" + value
-                        + " に変更しました。すぐに反映され、設定に保存されました。"), true);
+                        + " に変更しました。"), true);
         return 1;
     }
 
@@ -64,7 +64,7 @@ public final class GoGoUpCommands {
 
         int value = HeightLimit.getMaxBuildY();
         source.sendSuccess(
-                () -> Component.literal("設定を再読込しました。最大建築高度: Y=" + value), true);
+                () -> Component.literal("設定を再読込みしました。最大建築高度: Y=" + value), true);
         return 1;
     }
 }
