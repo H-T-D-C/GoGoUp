@@ -58,3 +58,7 @@ JDK 25と同梱のGradle Wrapper（9.8.1）を使用します。
 `build` はJARを作成し、`clean build` は生成物を削除して再作成します。`runServer` は `run/` に開発用サーバーを起動します。ワールドを読み込むには、そのサーバーのEULAへの同意が必要です。macOS/Linuxでは `./gradlew` を使用します。
 
 自動テストは未導入です。ソース構成と貢献手順は[AGENTS.md](AGENTS.md)、設計・残作業は[PLAN.md](PLAN.md)を参照してください。ローカルログの共有用 `test/`、開発ワールドの `run/`、キャッシュ・ビルド生成物はGit管理対象外です。
+
+## ライセンス
+
+[MIT License](LICENSE.txt)

@@ -4,7 +4,7 @@
   "version": "${version}",
   "name": "GoGoUp",
   "description": "Expands the vanilla dimensions' build range with a configurable, live server-side placement ceiling.",
-  "license": "All-Rights-Reserved",
+  "license": "MIT",
   "environment": "server",
   "entrypoints": {
     "main": [
