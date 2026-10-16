@@ -7,6 +7,7 @@ gradle-app.setting
 # Local Minecraft development runs and server data
 run/
 runs/
+test/
 
 # IDE metadata
 .idea/

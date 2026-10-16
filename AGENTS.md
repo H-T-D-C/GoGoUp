@@ -2,33 +2,29 @@
 
 ## Project Structure & Module Organization
 
-GoGoUp is a Fabric Minecraft mod scaffold targeting Minecraft 26.1.2 and Java 25. Its metadata currently declares a client-only mod.
+GoGoUp is a server-only Fabric mod for Minecraft 26.1.2 and Java 25. Java sources live in `src/main/java/com/velters/gogoup/`: `GoGoUpMod` initializes the mod, `GoGoUpConfig` handles JSON persistence, `GoGoUpCommands` registers commands, and `HeightLimit` holds the active ceiling. Placement hooks are in `mixin/`.
 
-- `src/main/java/com/velters/gogoup/`: main initialization and shared code.
-- `src/client/java/com/velters/gogoup/client/`: client initialization and data generation.
-- `src/main/resources/`: `fabric.mod.json` and the main mixin configuration. Place mod assets under `assets/gogoup/` here.
-- `src/client/resources/`: client mixin configuration.
-- `build.gradle`, `settings.gradle`, and `gradle.properties`: build logic, plugin repositories, and dependency versions.
-
-Fabric Loom combines the main and client source sets into the mod. Keep client-specific Minecraft references in the client source set. Build outputs belong in `build/`; local game files belong in `run/`.
+Resources under `src/main/resources/` include Fabric metadata, Mixin registration, and the three vanilla dimension type overrides in `data/minecraft/dimension_type/`. There is no client source set, asset directory, or automated test suite. Read `README.md` for usage, `PLAN.md` for design and remaining work, and `docs/validation.md` for verification evidence.
 
 ## Build, Test, and Development Commands
 
-Use JDK 25 and the Gradle Wrapper, pinned to 9.8.1 in `gradle/wrapper/gradle-wrapper.properties`. On Windows, run `gradlew.bat`; on macOS/Linux, run `./gradlew`:
+Use JDK 25 and the Gradle Wrapper (9.8.1):
 
-- `gradlew.bat build`: compile, run configured checks, and package JARs in `build/libs/`.
-- `gradlew.bat runClient`: launch the development Minecraft client.
-- `gradlew.bat runDatagen`: invoke the Fabric data generator; add providers in `GogoupDataGenerator` when introducing generated resources.
-- `gradlew.bat test`: run Java tests once a test framework and tests are added.
+- `./gradlew build`: compile and package JARs into `build/libs/`.
+- `./gradlew clean build`: rebuild from fresh generated outputs.
+- `./gradlew runServer`: start the dedicated development server in `run/`; world loading requires its EULA acceptance.
+- `./gradlew test`: currently reports no test sources; no framework or coverage target is configured.
+
+On Windows PowerShell, use `.\gradlew.bat`. Keep local worlds, diagnostic logs, and caches out of Git; `run/`, `test/`, `build/`, and `.gradle/` are ignored.
 
 ## Coding Style & Naming Conventions
 
-Follow existing files: four-space indentation for Java and Gradle, two spaces for JSON, UTF-8 encoding, and opening braces on the declaration line. Use `UpperCamelCase` for classes, `lowerCamelCase` for methods and variables, and `UPPER_SNAKE_CASE` for constants. Keep packages under `com.velters.gogoup` and resource identifiers under `gogoup`. No formatter or linter is configured.
+Use four spaces in Java and Gradle, two in JSON, and UTF-8. Use `UpperCamelCase` classes, `lowerCamelCase` methods, and `UPPER_SNAKE_CASE` constants. No formatter or linter is configured.
 
-## Testing Guidelines
+Keep code server-only. Centralize placement checks in `HeightLimit` and use focused Mixins; avoid item-wide handlers that intercept unrelated uses. Retain vanilla dimension properties except intended height changes. Internal `min_y` and `height` align to 16-block sections; user-facing `maxBuildY` is an inclusive integer coordinate.
 
-No test framework, test sources, or coverage threshold is configured. Add future unit tests under `src/test/java`, mirroring production packages and naming classes `*Test`. For gameplay changes, run `gradlew.bat build` and verify behavior with `gradlew.bat runClient`; record reproduction steps and results.
+## Validation & Pull Requests
 
-## Commit & Pull Request Guidelines
+Run `build` after source or resource changes. Manually check the configured ceiling and one block above with player placement, buckets, `/setblock`, and `/fill`; cover all dimensions, live changes, persistence, and existing worlds. Record confirmed results separately from pending checks.
 
-The repository has no commits yet, so no established commit convention exists. Use concise imperative subjects, such as `Add client initialization logging`. Keep changes focused. Pull requests should explain behavior changes, link relevant issues, report validation performed, and include screenshots or recordings for visible gameplay changes.
+Git history currently contains only `init` commits, so no convention is established. Use concise imperative subjects. PRs should describe behavior, compatibility, validation, and limitations; link relevant issues and include screenshots when they clarify visible behavior.

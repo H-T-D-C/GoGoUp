@@ -4,11 +4,12 @@
   "package": "com.velters.gogoup.mixin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
+    "BucketItemMixin",
+    "BlockItemMixin",
+    "BlockInputMixin",
+    "FillCommandMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "overwrites": {
-    "requireAnnotations": true
   }
 }

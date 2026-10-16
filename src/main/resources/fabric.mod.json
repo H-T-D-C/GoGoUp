@@ -3,33 +3,21 @@
   "id": "gogoup",
   "version": "${version}",
   "name": "GoGoUp",
-  "description": "",
-  "authors": [],
-  "contact": {},
+  "description": "Expands the vanilla dimensions' build range with a configurable, live server-side placement ceiling.",
   "license": "All-Rights-Reserved",
-  "icon": "assets/gogoup/icon.png",
-  "environment": "client",
+  "environment": "server",
   "entrypoints": {
-    "fabric-datagen": [
-      "com.velters.gogoup.client.GogoupDataGenerator"
-    ],
-    "client": [
-      "com.velters.gogoup.client.GogoupClient"
-    ],
     "main": [
-      "com.velters.gogoup.Gogoup"
+      "com.velters.gogoup.GoGoUpMod"
     ]
   },
   "mixins": [
-    "gogoup.mixins.json",
-    {
-      "config": "gogoup.client.mixins.json",
-      "environment": "client"
-    }
+    "gogoup.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric-api": "*",
-    "minecraft": "${minecraft_version}"
+    "minecraft": "${minecraft_version}",
+    "java": ">=25"
   }
 }
