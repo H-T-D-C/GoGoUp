@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "gogoup",
+  "version": "${version}",
+  "name": "GoGoUp",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/gogoup/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "fabric-datagen": [
+      "com.velters.gogoup.client.GogoupDataGenerator"
+    ],
+    "client": [
+      "com.velters.gogoup.client.GogoupClient"
+    ],
+    "main": [
+      "com.velters.gogoup.Gogoup"
+    ]
+  },
+  "mixins": [
+    "gogoup.mixins.json",
+    {
+      "config": "gogoup.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
